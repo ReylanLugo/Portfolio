@@ -53,7 +53,7 @@ function HeroFacts() {
       className="mt-7 flex flex-wrap items-center gap-2"
     >
       {site.quickFacts.map((f) => {
-        const label = t(`hero.facts.${f.id}` as 'hero.facts.open');
+        const label = t(`hero.facts.${f.id}`);
         const accent = 'accent' in f && f.accent;
         return (
           <li

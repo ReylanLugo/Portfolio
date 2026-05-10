@@ -28,7 +28,7 @@ export function NavPill({ active }: Props) {
                     className="absolute inset-0 -z-10 rounded-full bg-ink-700/80 ring-1 ring-accent/30"
                   />
                 )}
-                {t(`nav.${item.id}` as 'nav.work')}
+                {t(`nav.${item.id}`)}
               </a>
             </li>
           );

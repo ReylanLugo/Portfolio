@@ -29,7 +29,7 @@ function Stats() {
         {site.metrics.map((m) => (
           <li key={m.id}>
             <MetricStat
-              label={t(`about.metricsLabels.${m.id}` as 'about.metricsLabels.yearsBuilding')}
+              label={t(`about.metricsLabels.${m.id}`)}
               value={m.value}
               suffix={m.suffix}
             />

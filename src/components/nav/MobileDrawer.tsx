@@ -32,7 +32,7 @@ export function MobileDrawer({ open, onClose }: Props) {
                 <span className="text-accent mr-3 font-mono text-base align-middle">
                   0{i + 1}
                 </span>
-                {t(`nav.${item.id}` as 'nav.work')}
+                {t(`nav.${item.id}`)}
               </motion.a>
             ))}
             <motion.a
