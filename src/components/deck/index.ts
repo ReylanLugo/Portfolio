@@ -1,0 +1,1 @@
+export { HeroDeck } from './HeroDeck';
