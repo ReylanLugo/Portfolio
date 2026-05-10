@@ -14,7 +14,8 @@ function TimelineDot() {
 function TimelineEntry({ item, delay }: { item: ExperienceItem; delay: number }) {
   const t = useT();
   const role = t(`experience.${item.id}.role` as 'experience.avocado-block.role');
-  const bullets = t.raw(`experience.${item.id}.bullets` as never) as readonly string[];
+  const rawBullets = t.raw(`experience.${item.id}.bullets` as never);
+  const bullets: readonly string[] = Array.isArray(rawBullets) ? (rawBullets as readonly string[]) : [];
   return (
     <li className="relative pl-8 sm:pl-12 pb-12 last:pb-0">
       <TimelineDot />
