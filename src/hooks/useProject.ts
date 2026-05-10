@@ -1,28 +1,11 @@
 import { useT } from '@/i18n';
-import { projects, type Project, type ProjectId } from '@/data/projects';
+import { projects, type ProjectId } from '@/data/projects';
 import type { Catalog } from '@/i18n/catalog';
 
 type ProjectsCatalog = Catalog['projects'];
 type LocalizedProjectI18n = ProjectsCatalog[ProjectId];
 
-type LocalizedProject = Project & {
-  name: string;
-  tagline: string;
-  description: string;
-  highlights: readonly { label: string; value: string }[];
-  preview: NonNullable<Project['preview']> & {
-    title?: string;
-    lines?: readonly string[];
-    request?: readonly string[];
-    response?: readonly string[];
-    metric?: string;
-    value?: string;
-    delta?: string;
-    tileLabels?: readonly string[];
-  };
-};
-
-export function useProject(id: ProjectId): LocalizedProject | undefined {
+export function useProject(id: ProjectId) {
   const t = useT();
   const meta = projects.find((p) => p.id === id);
   if (!meta) return undefined;
@@ -43,5 +26,5 @@ export function useProject(id: ProjectId): LocalizedProject | undefined {
       ...(metaPreview ?? ({ kind: 'browser' } as const)),
       ...(previewI18n ?? {}),
     },
-  } as LocalizedProject;
+  };
 }

@@ -1,4 +1,3 @@
-import type { Project } from '@/data/projects';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 import { TerminalPreview } from './TerminalPreview';
@@ -8,25 +7,9 @@ import { MobilePreview } from './MobilePreview';
 import { ApiPreview } from './ApiPreview';
 import { GraphPreview } from './GraphPreview';
 import { GalleryPreview } from './GalleryPreview';
+import type { useProject } from '@/hooks/useProject';
 
-type LocalizedPreviewData = NonNullable<Project['preview']> & {
-  title?: string;
-  lines?: readonly string[];
-  request?: readonly string[];
-  response?: readonly string[];
-  metric?: string;
-  value?: string;
-  delta?: string;
-  tileLabels?: readonly string[];
-};
-
-type LocalizedProject = Project & {
-  name: string;
-  tagline: string;
-  description: string;
-  highlights: readonly { label: string; value: string }[];
-  preview: LocalizedPreviewData;
-};
+type LocalizedProject = NonNullable<ReturnType<typeof useProject>>;
 
 type Props = {
   project: LocalizedProject;
