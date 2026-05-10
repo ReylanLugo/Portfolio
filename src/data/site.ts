@@ -1,3 +1,11 @@
+export type NavId = 'work' | 'stack' | 'experience' | 'about' | 'contact';
+export type QuickFactId = 'open' | 'location' | 'years';
+export type MetricId =
+  | 'yearsBuilding'
+  | 'projectsInProd'
+  | 'commitsPerYear'
+  | 'coffeesPerSprint';
+
 export const site = {
   name: 'Reylan Lugo',
   shortName: 'Reylan',
@@ -13,19 +21,19 @@ export const site = {
     { id: 'projectsInProd', value: 24, suffix: '' },
     { id: 'commitsPerYear', value: 1800, suffix: '' },
     { id: 'coffeesPerSprint', value: 99, suffix: '' },
-  ] as const,
+  ] as const satisfies readonly { id: MetricId; value: number; suffix: string }[],
   quickFacts: [
     { id: 'open', accent: true },
     { id: 'location' },
     { id: 'years' },
-  ] as const,
+  ] as const satisfies readonly { id: QuickFactId; accent?: boolean }[],
   nav: [
-    { id: 'work' as const },
-    { id: 'stack' as const },
-    { id: 'experience' as const },
-    { id: 'about' as const },
-    { id: 'contact' as const },
-  ],
+    { id: 'work' },
+    { id: 'stack' },
+    { id: 'experience' },
+    { id: 'about' },
+    { id: 'contact' },
+  ] as const satisfies readonly { id: NavId }[],
 };
 
 export type SiteData = typeof site;

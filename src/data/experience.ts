@@ -1,5 +1,7 @@
+export type ExperienceId = 'avocado-block' | 'independent' | 'stratos-labs' | 'self-taught';
+
 export type ExperienceItem = {
-  id: string;
+  id: ExperienceId;
   company: string;
   period: string;
   location: string;
