@@ -154,10 +154,10 @@ export function DeckCard({ project, slot, total, projectIdx }: Props) {
                 textShadow: isFront ? `0 0 24px rgba(${accent}, 0.35)` : 'none',
               }}
             >
-              {name.replace('.', ' ')}
+              {String(name ?? '').replace('.', ' ')}
             </p>
             <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-bone-mute">
-              {tagline.split(/[—.,·]/)[0]?.toLowerCase().trim()} ·{' '}
+              {String(tagline ?? '').split(/[—.,·]/)[0]?.toLowerCase().trim()} ·{' '}
               {project.year}
             </p>
             <div className="mt-2 flex items-center gap-2">

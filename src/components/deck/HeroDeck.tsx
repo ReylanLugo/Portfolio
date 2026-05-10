@@ -22,7 +22,7 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
   const total = deck.length;
   const front = deck[cycle % total];
   const frontName = front
-    ? ((t.raw(`projects.${front.id}.name` as never) as string) ?? '')
+    ? String((t.raw(`projects.${front.id}.name` as never) as string) ?? '')
     : '';
 
   const advanceFromKeyboard = (e: React.KeyboardEvent) => {
@@ -70,7 +70,7 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
       <DeckIndicator
         total={total}
         active={cycle % total}
-        label={frontName.replace('.', ' ')}
+        label={String(frontName ?? '').replace('.', ' ')}
       />
     </div>
   );
