@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { projects } from '@/data/projects';
+import { useT } from '@/i18n';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useDeckCycle } from '@/hooks/useDeckCycle';
 import { DECK_SLOT_OFFSETS, DECK_CYCLE_MS } from './deckSlots';
@@ -15,10 +16,12 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
   const reduced = useReducedMotion();
   const [paused, setPaused] = useState(false);
   const { cycle, advance } = useDeckCycle({ intervalMs: DECK_CYCLE_MS, paused });
+  const t = useT();
 
   const deck = projects.slice(0, DECK_SLOT_OFFSETS.length);
   const total = deck.length;
   const front = deck[cycle % total];
+  const frontName = front ? t.raw(`projects.${front.id}.name`) : '';
 
   const advanceFromKeyboard = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -46,7 +49,7 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
         onKeyDown={advanceFromKeyboard}
         role="button"
         tabIndex={0}
-        aria-label="Avanzar carta del deck"
+        aria-label={t('a11y.deckAdvance')}
       >
         {deck.map((project, projectIdx) => {
           const slot = (projectIdx - cycle + total * 1000) % total;
@@ -65,7 +68,7 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
       <DeckIndicator
         total={total}
         active={cycle % total}
-        label={front?.name.replace('.', ' ') ?? ''}
+        label={String(frontName ?? '').replace('.', ' ')}
       />
     </div>
   );

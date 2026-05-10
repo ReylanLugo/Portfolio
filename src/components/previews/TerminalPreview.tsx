@@ -1,17 +1,17 @@
-import type { Preview } from '@/data/projects';
+import type { TerminalPreviewData } from './types';
 import { LiveBadge } from '@/components/ui';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 
 type Props = {
-  preview: Extract<Preview, { kind: 'terminal' }>;
+  preview: TerminalPreviewData;
   accentRgb: string;
 };
 
 export function TerminalPreview({ preview, accentRgb }: Props) {
   return (
     <PreviewFrame accentRgb={accentRgb}>
-      <WindowChrome title={preview.title} accentRgb={accentRgb} variant="terminal" />
+      <WindowChrome title={preview.title ?? ''} accentRgb={accentRgb} variant="terminal" />
       <div className="relative p-5 sm:p-6 font-mono text-xs sm:text-sm">
         {(preview.lines ?? []).map((l, i) => (
           <div

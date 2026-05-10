@@ -1,39 +1,38 @@
-import { Section } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
-import { GlowCard } from '@/components/ui/GlowCard';
+import { Section, Reveal, GlowCard, EyebrowLabel, MetricStat, RichText } from '@/components/ui';
 import { site } from '@/data/site';
-import { EyebrowLabel } from '@/components/ui';
-import { MetricStat } from '@/components/ui';
+import { useT } from '@/i18n';
 
 function Bio() {
+  const t = useT();
+  const p1 = t('about.p1', { name: site.name });
   return (
     <div className="space-y-5 text-bone-dim text-pretty leading-relaxed">
       <p>
-        Soy <span className="text-bone">{site.name}</span>, full stack engineer
-        especializado en producto. Me siento cómodo en el front (React, TS,
-        motion) y en el back (Node, Postgres, infra simple que escala).
+        {p1.split(site.name).flatMap((part, i, arr) =>
+          i < arr.length - 1
+            ? [<span key={`p${i}`}>{part}</span>, <span key={`n${i}`} className="text-bone">{site.name}</span>]
+            : [<span key={`p${i}`}>{part}</span>],
+        )}
       </p>
-      <p>
-        Diseño antes de codear, pero no me casé con Figma: muchas veces el
-        prototipo más útil es un branch con HMR encendido. Prefiero entregar
-        vertical thin slices que mockups infinitos.
-      </p>
-      <p>
-        Cuando no estoy en el editor: leyendo sci-fi, perdiéndome en synth
-        hardware o pidiendo otro café.
-      </p>
+      <p>{t('about.p2')}</p>
+      <p>{t('about.p3')}</p>
     </div>
   );
 }
 
 function Stats() {
+  const t = useT();
   return (
     <GlowCard className="p-6 sm:p-8">
-      <EyebrowLabel>stats</EyebrowLabel>
+      <EyebrowLabel>{t('about.statsLabel')}</EyebrowLabel>
       <ul className="mt-6 grid grid-cols-2 gap-y-8 gap-x-6">
         {site.metrics.map((m) => (
-          <li key={m.label}>
-            <MetricStat label={m.label} value={m.value} suffix={m.suffix} />
+          <li key={m.id}>
+            <MetricStat
+              label={t(`about.metricsLabels.${m.id}`)}
+              value={m.value}
+              suffix={m.suffix}
+            />
           </li>
         ))}
       </ul>
@@ -42,18 +41,13 @@ function Stats() {
 }
 
 export function About() {
+  const t = useT();
   return (
     <Section
       id="about"
-      label="About"
-      title={
-        <>
-          Construyo software como{' '}
-          <span className="text-accent">quien arma sintetizadores</span>: módulos
-          chicos, conexiones claras, sonido grande.
-        </>
-      }
-      description="Trabajo en remoto desde LATAM. Me obsesionan los detalles de DX, las animaciones que no estorban y los sistemas que envejecen sin dolor."
+      label={t('sections.about.eyebrow')}
+      title={<RichText template={t('sections.about.title')} />}
+      description={t('sections.about.description')}
     >
       <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
         <Reveal>

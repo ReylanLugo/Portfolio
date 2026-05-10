@@ -3,7 +3,7 @@ import { StatTile } from './StatTile';
 type Stat = { label: string; value: string };
 
 type Props = {
-  stats: Stat[];
+  stats: readonly Stat[];
   accentRgb: string;
 };
 

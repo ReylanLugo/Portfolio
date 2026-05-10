@@ -1,4 +1,3 @@
-import type { Project } from '@/data/projects';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 import { TerminalPreview } from './TerminalPreview';
@@ -8,9 +7,12 @@ import { MobilePreview } from './MobilePreview';
 import { ApiPreview } from './ApiPreview';
 import { GraphPreview } from './GraphPreview';
 import { GalleryPreview } from './GalleryPreview';
+import type { useProject } from '@/hooks/useProject';
+
+type LocalizedProject = NonNullable<ReturnType<typeof useProject>>;
 
 type Props = {
-  project: Project;
+  project: LocalizedProject;
   accentRgb: string;
 };
 

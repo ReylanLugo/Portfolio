@@ -1,8 +1,8 @@
-import type { Preview } from '@/data/projects';
+import type { MobilePreviewData } from './types';
 import { LiveBadge } from '@/components/ui';
 
 type Props = {
-  preview: Extract<Preview, { kind: 'mobile' }>;
+  preview: MobilePreviewData;
   accentRgb: string;
 };
 
@@ -25,7 +25,7 @@ export function MobilePreview({ preview, accentRgb }: Props) {
           </span>
         </div>
         <div className="border-t border-ink-800/60 px-4 pb-3 pt-3">
-          <p className="font-display text-base font-medium text-bone">{preview.title}</p>
+          <p className="font-display text-base font-medium text-bone">{preview.title ?? ''}</p>
           <LiveBadge accentRgb={accentRgb} />
         </div>
         <div className="flex flex-1 flex-col gap-2 overflow-hidden px-4 pb-4">

@@ -1,9 +1,14 @@
+export type NavId = 'work' | 'stack' | 'experience' | 'about' | 'contact';
+export type QuickFactId = 'open' | 'location' | 'years';
+export type MetricId =
+  | 'yearsBuilding'
+  | 'projectsInProd'
+  | 'commitsPerYear'
+  | 'coffeesPerSprint';
+
 export const site = {
   name: 'Reylan Lugo',
   shortName: 'Reylan',
-  role: 'Full stack developer',
-  tagline: 'Construyo sistemas que respiran — interfaces tech-noir, APIs sólidas, código que envejece bien.',
-  location: 'Remote · LATAM',
   email: 'reylan@avocadoblock.com',
   cvUrl: '/cv-reylan-lugo.pdf',
   social: {
@@ -11,24 +16,24 @@ export const site = {
     linkedin: 'https://www.linkedin.com/in/reylanlugo',
     x: 'https://x.com/reylanlugo',
   },
-  quickFacts: [
-    { label: 'OPEN · Q3 26', accent: true },
-    { label: 'CARACAS / UTC-4' },
-    { label: '~6 YRS' },
-  ] as { label: string; accent?: boolean }[],
   metrics: [
-    { label: 'años construyendo', value: 6, suffix: '+' },
-    { label: 'proyectos en prod', value: 24, suffix: '' },
-    { label: 'commits / año', value: 1800, suffix: '' },
-    { label: 'cafés por sprint', value: 99, suffix: '' },
-  ],
+    { id: 'yearsBuilding', value: 6, suffix: '+' },
+    { id: 'projectsInProd', value: 24, suffix: '' },
+    { id: 'commitsPerYear', value: 1800, suffix: '' },
+    { id: 'coffeesPerSprint', value: 99, suffix: '' },
+  ] as const satisfies readonly { id: MetricId; value: number; suffix: string }[],
+  quickFacts: [
+    { id: 'open', accent: true },
+    { id: 'location' },
+    { id: 'years' },
+  ] as const satisfies readonly { id: QuickFactId; accent?: boolean }[],
   nav: [
-    { id: 'work', label: 'Work' },
-    { id: 'stack', label: 'Stack' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
-  ],
+    { id: 'work' },
+    { id: 'stack' },
+    { id: 'experience' },
+    { id: 'about' },
+    { id: 'contact' },
+  ] as const satisfies readonly { id: NavId }[],
 };
 
 export type SiteData = typeof site;

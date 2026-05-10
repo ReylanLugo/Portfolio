@@ -1,9 +1,9 @@
-import type { Preview } from '@/data/projects';
+import type { ApiPreviewData } from './types';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 
 type Props = {
-  preview: Extract<Preview, { kind: 'api' }>;
+  preview: ApiPreviewData;
   accentRgb: string;
 };
 
@@ -47,7 +47,7 @@ function Pane({
 export function ApiPreview({ preview, accentRgb }: Props) {
   return (
     <PreviewFrame accentRgb={accentRgb}>
-      <WindowChrome title={preview.title} accentRgb={accentRgb} />
+      <WindowChrome title={preview.title ?? ''} accentRgb={accentRgb} />
 
       <div className="border-b border-ink-700/40 px-4 py-3">
         <div className="flex flex-wrap items-center gap-2 font-mono text-[11px]">
@@ -76,7 +76,7 @@ export function ApiPreview({ preview, accentRgb }: Props) {
           </Pane>
         )}
         <Pane title="response · application/json" arrow="←" accentRgb={accentRgb}>
-          {preview.response.map((l, i) => (
+          {(preview.response ?? []).map((l, i) => (
             <div
               key={i}
               style={{

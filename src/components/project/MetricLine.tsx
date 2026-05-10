@@ -3,7 +3,7 @@ import { MetaDivider } from '@/components/ui';
 type Props = {
   index: string;
   year: string;
-  role: string;
+  role?: string;
   accentRgb: string;
 };
 
@@ -13,8 +13,12 @@ export function MetricLine({ index, year, role, accentRgb }: Props) {
       <span style={{ color: `rgb(${accentRgb})` }}>{index}</span>
       <MetaDivider />
       <span>{year}</span>
-      <MetaDivider />
-      <span>{role}</span>
+      {role && (
+        <>
+          <MetaDivider />
+          <span>{role}</span>
+        </>
+      )}
     </div>
   );
 }

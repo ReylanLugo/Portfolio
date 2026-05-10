@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import type { Project } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useScrollActive } from '@/hooks/useScrollActive';
+import { useProject } from '@/hooks/useProject';
 import { generateBlobs } from '@/lib/blob';
 import { accentRgb } from '@/lib/accent';
 import { cn } from '@/lib/cn';
@@ -46,6 +47,9 @@ export function ProjectCard({ project, index, total }: Props) {
   const reduced = useReducedMotion();
   const accent = accentRgb(project.accent);
   const blobs = useMemo(() => generateBlobs(project.id, 2), [project.id]);
+  const localized = useProject(project.id);
+  if (!localized) return null;
+  const { name, tagline, description, highlights } = localized;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -93,18 +97,17 @@ export function ProjectCard({ project, index, total }: Props) {
               <MetricLine
                 index={project.index}
                 year={project.year}
-                role={project.role}
                 accentRgb={accent}
               />
 
               <h3 className="mt-4 font-display text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight text-balance">
-                {project.name}
+                {name}
               </h3>
               <p className="mt-3 max-w-xl font-display text-lg sm:text-xl text-bone-dim">
-                {project.tagline}
+                {tagline}
               </p>
               <p className="mt-6 max-w-xl text-sm sm:text-base text-bone-dim/90 text-pretty">
-                {project.description}
+                {description}
               </p>
 
               <ul className="mt-6 flex flex-wrap gap-2">
@@ -115,9 +118,9 @@ export function ProjectCard({ project, index, total }: Props) {
                 ))}
               </ul>
 
-              {project.highlights && project.highlights.length > 0 && (
+              {highlights && highlights.length > 0 && (
                 <div className="mt-8">
-                  <StatGrid stats={project.highlights} accentRgb={accent} />
+                  <StatGrid stats={highlights} accentRgb={accent} />
                 </div>
               )}
             </div>
@@ -134,7 +137,7 @@ export function ProjectCard({ project, index, total }: Props) {
           </div>
 
           <div className="relative min-h-[260px] sm:min-h-[380px] lg:min-h-[540px]">
-            <ProjectPreview project={project} accentRgb={accent} />
+            <ProjectPreview project={localized} accentRgb={accent} />
           </div>
         </div>
       </motion.article>

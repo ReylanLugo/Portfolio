@@ -16,3 +16,5 @@ export { Section } from './Section';
 export { StatGrid } from './StatGrid';
 export { StatTile } from './StatTile';
 export { WindowDots } from './WindowDots';
+export { RichText } from './RichText';
+export { LocaleSwitcher } from './LocaleSwitcher';

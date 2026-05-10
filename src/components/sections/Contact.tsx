@@ -1,8 +1,7 @@
 import { ArrowUpRight, Download, Github, Mail } from 'lucide-react';
-import { Section } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
+import { Section, Reveal, EyebrowLabel, GhostButton, PrimaryButton, RichText } from '@/components/ui';
 import { site } from '@/data/site';
-import { EyebrowLabel, GhostButton, PrimaryButton } from '@/components/ui';
+import { useT } from '@/i18n';
 
 function ContactGlows() {
   return (
@@ -20,26 +19,19 @@ function ContactGlows() {
 }
 
 function ContactCtas() {
+  const t = useT();
   return (
     <div className="mt-10 flex flex-wrap items-center gap-3">
       <PrimaryButton href={`mailto:${site.email}`} className="px-5 py-3">
         <Mail size={14} />
         {site.email}
-        <ArrowUpRight
-          size={14}
-          className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-        />
+        <ArrowUpRight size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </PrimaryButton>
       <GhostButton href={site.cvUrl} download className="px-5 py-3">
         <Download size={14} />
-        Download CV
+        {t('contact.cv')}
       </GhostButton>
-      <GhostButton
-        href={site.social.github}
-        target="_blank"
-        rel="noreferrer"
-        className="px-5 py-3"
-      >
+      <GhostButton href={site.social.github} target="_blank" rel="noreferrer" className="px-5 py-3">
         <Github size={14} />
         github.com/ReylanLugo
       </GhostButton>
@@ -48,17 +40,15 @@ function ContactCtas() {
 }
 
 export function Contact() {
+  const t = useT();
   return (
-    <Section id="contact" label="Contact">
+    <Section id="contact" label={t('sections.contact.eyebrow')}>
       <Reveal>
         <div className="relative overflow-hidden rounded-3xl border border-ink-700/70 bg-ink-900/70 px-6 py-14 sm:px-12 sm:py-20 lg:px-20 lg:py-28">
           <ContactGlows />
-          <EyebrowLabel>let's build</EyebrowLabel>
+          <EyebrowLabel>{t('contact.eyebrow')}</EyebrowLabel>
           <h2 className="mt-4 font-display text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight text-balance">
-            ¿Tienes una idea?{' '}
-            <span className="block text-bone-dim">
-              La construimos <span className="text-accent">esta semana</span>.
-            </span>
+            <RichText template={t('contact.title')} />
           </h2>
           <ContactCtas />
         </div>
