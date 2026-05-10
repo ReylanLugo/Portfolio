@@ -36,6 +36,17 @@ export type TRawKey = RawPath<Catalog>;
 
 export type TParams = Record<string, string | number>;
 
+export type ValueAt<T, P extends string> =
+  P extends `${infer K}.${infer Rest}`
+    ? K extends keyof T
+      ? T[K] extends Record<string, unknown> | readonly unknown[]
+        ? ValueAt<T[K], Rest>
+        : never
+      : never
+    : P extends keyof T
+      ? T[P]
+      : never;
+
 export type TFunc = ((key: TKey, params?: TParams) => string) & {
-  raw: <K extends TRawKey>(key: K) => unknown;
+  raw: <K extends TRawKey>(key: K) => ValueAt<Catalog, K>;
 };

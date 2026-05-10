@@ -1,3 +1,12 @@
+export type ProjectId =
+  | 'vault-os'
+  | 'atlas-api'
+  | 'ink-cms'
+  | 'pulse-monitor'
+  | 'relay-gateway'
+  | 'tempo-analytics'
+  | 'mosaic-studio';
+
 export type ProjectAccent =
   | 'orange' | 'amber' | 'cyan' | 'violet' | 'green' | 'rose';
 
@@ -20,7 +29,7 @@ export type Preview =
   | { kind: 'gallery'; tiles: { tone: number }[] };
 
 export type Project = {
-  id: string;
+  id: ProjectId;
   index: string;
   stack: string[];
   year: string;
