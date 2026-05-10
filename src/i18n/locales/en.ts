@@ -2,7 +2,12 @@
 import type { Catalog } from '../catalog';
 
 export const en = {
-  a11y: { languageSwitcher: 'Language' },
+  a11y: {
+    languageSwitcher: 'Language',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    deckAdvance: 'Advance deck card',
+  },
   nav: {
     work: 'Work',
     stack: 'Stack',

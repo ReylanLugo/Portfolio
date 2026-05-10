@@ -2,6 +2,9 @@
 export const es = {
   a11y: {
     languageSwitcher: 'Idioma',
+    openMenu: 'Abrir menú',
+    closeMenu: 'Cerrar menú',
+    deckAdvance: 'Avanzar carta del deck',
   },
   nav: {
     work: 'Work',
