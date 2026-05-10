@@ -1,0 +1,99 @@
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    @apply bg-ink-950 text-bone;
+    font-family: 'Space Grotesk Variable', system-ui, sans-serif;
+  }
+
+  body {
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(249, 115, 22, 0.35);
+    color: #fff;
+  }
+
+  *:focus-visible {
+    outline: 2px solid theme('colors.accent.DEFAULT');
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 10%,
+      #000 90%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 10%,
+      #000 90%,
+      transparent
+    );
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(232, 230, 223, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232, 230, 223, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .bg-radial-glow {
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 50% 0%,
+        rgba(249, 115, 22, 0.12),
+        transparent 60%
+      );
+  }
+
+  .ring-glow {
+    box-shadow:
+      0 0 0 1px rgba(249, 115, 22, 0.35),
+      0 0 60px -10px rgba(249, 115, 22, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
