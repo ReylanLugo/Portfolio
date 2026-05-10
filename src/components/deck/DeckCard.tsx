@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Project } from '@/data/projects';
 import { accentRgb as accentRgbOf } from '@/lib/accent';
+import { useProject } from '@/hooks/useProject';
 import { DECK_SLOT_OFFSETS, type DeckSlotOffset } from './deckSlots';
 import { DeckCardMark } from './DeckCardMark';
 
@@ -94,6 +95,9 @@ export function DeckCard({ project, slot, total, projectIdx }: Props) {
   const isFront = slot === 0;
   const isBack = slot === total - 1;
   const accent = accentRgbOf(project.accent);
+  const localized = useProject(project.id);
+  const name = localized?.name ?? project.id;
+  const tagline = localized?.tagline ?? '';
 
   return (
     <motion.div
@@ -150,10 +154,10 @@ export function DeckCard({ project, slot, total, projectIdx }: Props) {
                 textShadow: isFront ? `0 0 24px rgba(${accent}, 0.35)` : 'none',
               }}
             >
-              {project.name.replace('.', ' ')}
+              {name.replace('.', ' ')}
             </p>
             <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-bone-mute">
-              {project.tagline.split(/[—.,·]/)[0]?.toLowerCase().trim()} ·{' '}
+              {tagline.split(/[—.,·]/)[0]?.toLowerCase().trim()} ·{' '}
               {project.year}
             </p>
             <div className="mt-2 flex items-center gap-2">
