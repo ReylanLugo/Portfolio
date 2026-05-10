@@ -58,7 +58,7 @@ export function Nav() {
 
           <button
             type="button"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={open ? t('a11y.closeMenu') : t('a11y.openMenu')}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-ink-700/70 bg-ink-900/60 text-bone backdrop-blur"

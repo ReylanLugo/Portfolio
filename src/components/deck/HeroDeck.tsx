@@ -51,7 +51,7 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
         onKeyDown={advanceFromKeyboard}
         role="button"
         tabIndex={0}
-        aria-label="Avanzar carta del deck"
+        aria-label={t('a11y.deckAdvance')}
       >
         {deck.map((project, projectIdx) => {
           const slot = (projectIdx - cycle + total * 1000) % total;
