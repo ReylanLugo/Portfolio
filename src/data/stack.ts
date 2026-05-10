@@ -1,0 +1,31 @@
+export const stackRowA = [
+  'TypeScript',
+  'React',
+  'Next.js',
+  'Node.js',
+  'Vite',
+  'Tailwind',
+  'Framer Motion',
+  'tRPC',
+  'GraphQL',
+  'Zod',
+  'Vitest',
+  'Playwright',
+];
+
+export const stackRowB = [
+  'Postgres',
+  'Redis',
+  'SQLite',
+  'Drizzle',
+  'Prisma',
+  'Docker',
+  'AWS',
+  'Cloudflare',
+  'Fly.io',
+  'NATS',
+  'Rust',
+  'Go',
+  'Python',
+  'Linux',
+];
