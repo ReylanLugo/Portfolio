@@ -21,9 +21,7 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
   const deck = projects.slice(0, DECK_SLOT_OFFSETS.length);
   const total = deck.length;
   const front = deck[cycle % total];
-  const frontName = front
-    ? String((t.raw(`projects.${front.id}.name` as never) as string) ?? '')
-    : '';
+  const frontName = front ? t.raw(`projects.${front.id}.name`) : '';
 
   const advanceFromKeyboard = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {

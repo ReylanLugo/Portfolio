@@ -4,28 +4,28 @@ type Base = NonNullable<Project['preview']>;
 
 export type TerminalPreviewData = Extract<Base, { kind: 'terminal' }> & {
   title?: string;
-  lines?: string[];
+  lines?: readonly string[];
 };
 
 export type EditorPreviewData = Extract<Base, { kind: 'editor' }> & {
   title?: string;
-  lines?: string[];
+  lines?: readonly string[];
 };
 
 export type BrowserPreviewData = Extract<Base, { kind: 'browser' }> & {
   title?: string;
-  lines?: string[];
+  lines?: readonly string[];
 };
 
 export type MobilePreviewData = Extract<Base, { kind: 'mobile' }> & {
   title?: string;
-  lines?: string[];
+  lines?: readonly string[];
 };
 
 export type ApiPreviewData = Extract<Base, { kind: 'api' }> & {
   title?: string;
-  request?: string[];
-  response?: string[];
+  request?: readonly string[];
+  response?: readonly string[];
 };
 
 export type GraphPreviewData = Extract<Base, { kind: 'graph' }> & {
@@ -37,5 +37,5 @@ export type GraphPreviewData = Extract<Base, { kind: 'graph' }> & {
 
 export type GalleryPreviewData = Extract<Base, { kind: 'gallery' }> & {
   title?: string;
-  tileLabels?: string[];
+  tileLabels?: readonly string[];
 };

@@ -15,7 +15,7 @@ function TimelineEntry({ item, delay }: { item: ExperienceItem; delay: number })
   const t = useT();
   const role = t(`experience.${item.id}.role`);
   const rawBullets = t.raw(`experience.${item.id}.bullets`);
-  const bullets: readonly string[] = Array.isArray(rawBullets) ? (rawBullets as readonly string[]) : [];
+  const bullets: readonly string[] = Array.isArray(rawBullets) ? rawBullets : [];
   return (
     <li className="relative pl-8 sm:pl-12 pb-12 last:pb-0">
       <TimelineDot />

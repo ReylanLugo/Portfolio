@@ -11,20 +11,20 @@ import { GalleryPreview } from './GalleryPreview';
 
 type LocalizedPreviewData = NonNullable<Project['preview']> & {
   title?: string;
-  lines?: string[];
-  request?: string[];
-  response?: string[];
+  lines?: readonly string[];
+  request?: readonly string[];
+  response?: readonly string[];
   metric?: string;
   value?: string;
   delta?: string;
-  tileLabels?: string[];
+  tileLabels?: readonly string[];
 };
 
 type LocalizedProject = Project & {
   name: string;
   tagline: string;
   description: string;
-  highlights: { label: string; value: string }[];
+  highlights: readonly { label: string; value: string }[];
   preview: LocalizedPreviewData;
 };
 
