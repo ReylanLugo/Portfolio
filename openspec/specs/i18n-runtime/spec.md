@@ -1,7 +1,9 @@
 # i18n-runtime Specification
 
 ## Purpose
-TBD - created by archiving change add-i18n-multi-language. Update Purpose after archive.
+
+Define the runtime contract of the in-house i18n module that powers locale switching across the portfolio SPA. This capability owns the React provider, the `useT` / `useLocale` hooks, the `t.raw` typed subtree accessor, locale detection precedence, persistence semantics, and the `<html lang>` side effect. It guarantees that every translatable string read flows through a single, type-safe API and that locale changes propagate atomically to every consumer in one render.
+
 ## Requirements
 ### Requirement: Provider initializes locale from layered detection
 

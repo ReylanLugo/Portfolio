@@ -1,7 +1,9 @@
 # locale-switcher-ui Specification
 
 ## Purpose
-TBD - created by archiving change add-i18n-multi-language. Update Purpose after archive.
+
+Define the user-facing control that lets visitors switch active locale at runtime. The `<LocaleSwitcher>` atom is the only UI surface authorized to invoke `setLocale`. This capability prescribes its rendering (one button per `LOCALES` entry, uppercase code, segmented pill with `motion.layoutId` transition), accessibility contract (`role="group"`, `aria-pressed`, translated `aria-label`), interaction semantics (click-on-active is no-op), and required mounting points (desktop nav and mobile drawer). A correct implementation guarantees that the active locale is always announced to assistive technology and that the visual state animates rather than snaps.
+
 ## Requirements
 ### Requirement: LocaleSwitcher renders one button per supported locale
 

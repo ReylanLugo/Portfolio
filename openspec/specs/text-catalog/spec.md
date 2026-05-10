@@ -1,7 +1,9 @@
 # text-catalog Specification
 
 ## Purpose
-TBD - created by archiving change add-i18n-multi-language. Update Purpose after archive.
+
+Define the structural contract of the per-locale text catalogs that back `useT()`. The Spanish catalog (`src/i18n/locales/es.ts`) is the canonical source — its shape, derived via `Catalog = DeepStringify<typeof es>`, is the type every other locale must `satisfies`. This capability locks key parity at compile time, prescribes catalog organization (nested by section, dot-notation paths), enumerates supported locales as a single source of truth, and explicitly excludes language-neutral data (e.g. brand-name stack chips) from the catalog so the i18n surface only owns translatable copy.
+
 ## Requirements
 ### Requirement: Spanish catalog is the canonical type source
 
