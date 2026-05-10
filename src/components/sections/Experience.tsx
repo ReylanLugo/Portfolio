@@ -1,5 +1,6 @@
-import { Section, Reveal } from '@/components/ui';
+import { Section, Reveal, RichText } from '@/components/ui';
 import { experience, type ExperienceItem } from '@/data/experience';
+import { useT } from '@/i18n';
 
 function TimelineDot() {
   return (
@@ -11,6 +12,9 @@ function TimelineDot() {
 }
 
 function TimelineEntry({ item, delay }: { item: ExperienceItem; delay: number }) {
+  const t = useT();
+  const role = t(`experience.${item.id}.role` as 'experience.avocado-block.role');
+  const bullets = t.raw(`experience.${item.id}.bullets` as never) as readonly string[];
   return (
     <li className="relative pl-8 sm:pl-12 pb-12 last:pb-0">
       <TimelineDot />
@@ -24,10 +28,10 @@ function TimelineEntry({ item, delay }: { item: ExperienceItem; delay: number })
           </span>
         </div>
         <p className="mt-1 font-mono text-xs text-bone-dim">
-          {item.role} · {item.location}
+          {role} · {item.location}
         </p>
         <ul className="mt-4 space-y-2 text-bone-dim/95 max-w-2xl text-pretty">
-          {item.bullets.map((b, j) => (
+          {bullets.map((b, j) => (
             <li key={j} className="flex gap-3">
               <span className="mt-2.5 h-px w-3 shrink-0 bg-bone-mute/50" />
               <span>{b}</span>
@@ -40,21 +44,17 @@ function TimelineEntry({ item, delay }: { item: ExperienceItem; delay: number })
 }
 
 export function Experience() {
+  const t = useT();
   return (
     <Section
       id="experience"
-      label="Track record"
-      title={
-        <>
-          Seis años <span className="text-accent">construyendo</span>{' '}
-          y rompiendo cosas en la web.
-        </>
-      }
-      description="Una línea editada de los lugares donde aprendí algo que hoy uso casi a diario."
+      label={t('sections.experience.eyebrow')}
+      title={<RichText template={t('sections.experience.title')} />}
+      description={t('sections.experience.description')}
     >
       <ol className="relative ml-3 sm:ml-6 border-l border-ink-700/60">
         {experience.map((item, i) => (
-          <TimelineEntry key={item.company} item={item} delay={i * 0.06} />
+          <TimelineEntry key={item.id} item={item} delay={i * 0.06} />
         ))}
       </ol>
     </Section>
