@@ -1,12 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { site } from '@/data/site';
+import { LocaleSwitcher } from '@/components/ui';
+import { useT } from '@/i18n';
 
-type Props = {
-  open: boolean;
-  onClose: () => void;
-};
+type Props = { open: boolean; onClose: () => void };
 
 export function MobileDrawer({ open, onClose }: Props) {
+  const t = useT();
   return (
     <AnimatePresence>
       {open && (
@@ -18,6 +18,7 @@ export function MobileDrawer({ open, onClose }: Props) {
           className="fixed inset-0 z-40 md:hidden bg-ink-950/95 backdrop-blur-xl"
         >
           <nav className="flex h-full flex-col items-start justify-center gap-6 px-8">
+            <LocaleSwitcher />
             {site.nav.map((item, i) => (
               <motion.a
                 key={item.id}
@@ -31,7 +32,7 @@ export function MobileDrawer({ open, onClose }: Props) {
                 <span className="text-accent mr-3 font-mono text-base align-middle">
                   0{i + 1}
                 </span>
-                {item.label}
+                {t(`nav.${item.id}` as 'nav.work')}
               </motion.a>
             ))}
             <motion.a
@@ -42,7 +43,7 @@ export function MobileDrawer({ open, onClose }: Props) {
               transition={{ delay: 0.35 }}
               className="mt-6 inline-flex items-center rounded-full bg-accent px-5 py-2.5 font-mono text-xs uppercase tracking-[0.2em] text-ink-950 shadow-glow"
             >
-              Hire me →
+              {t('nav.hire')} →
             </motion.a>
           </nav>
         </motion.div>

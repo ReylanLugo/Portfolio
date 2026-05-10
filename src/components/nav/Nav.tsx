@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { site } from '@/data/site';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { LocaleSwitcher } from '@/components/ui';
+import { useT } from '@/i18n';
 import { NavLogo } from './NavLogo';
 import { NavPill } from './NavPill';
 import { MobileDrawer } from './MobileDrawer';
@@ -32,6 +34,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const scrolled = useScrolled();
   const active = useActiveSection(navIds);
+  const t = useT();
 
   useBodyScrollLock(open);
 
@@ -43,12 +46,15 @@ export function Nav() {
 
           <NavPill active={active} />
 
-          <a
-            href={`mailto:${site.email}`}
-            className="hidden md:inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-950 shadow-glow transition-transform hover:scale-[1.03]"
-          >
-            Hire me
-          </a>
+          <div className="hidden md:flex items-center gap-3">
+            <LocaleSwitcher />
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-950 shadow-glow transition-transform hover:scale-[1.03]"
+            >
+              {t('nav.hire')}
+            </a>
+          </div>
 
           <button
             type="button"
