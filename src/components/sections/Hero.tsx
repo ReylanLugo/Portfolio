@@ -11,8 +11,10 @@ import {
   PrimaryButton,
   PulseDot,
 } from '@/components/ui';
+import { useT } from '@/i18n';
 
 function HeroStatusPill() {
+  const t = useT();
   return (
     <motion.p
       initial={{ opacity: 0, y: 16 }}
@@ -21,19 +23,20 @@ function HeroStatusPill() {
       className="mb-6 inline-flex items-center gap-2 rounded-full border border-ink-700/70 bg-ink-900/60 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-bone-dim backdrop-blur"
     >
       <PulseDot size={6} />
-      Available · {site.location}
+      {t('hero.available')}
     </motion.p>
   );
 }
 
 function HeroTitle() {
+  const t = useT();
   return (
     <h1 className="font-display font-medium leading-[0.92] tracking-[-0.03em] text-balance">
       <span className="block text-[clamp(3rem,10vw,8.5rem)]">
-        <ScrambleText text="Reylan" trigger="cycle" cycleMs={9000} />
+        <ScrambleText text={t('hero.firstName')} trigger="cycle" cycleMs={9000} />
       </span>
       <span className="block text-[clamp(3rem,10vw,8.5rem)]">
-        <ScrambleText text="Lugo" trigger="cycle" cycleMs={11000} />
+        <ScrambleText text={t('hero.lastName')} trigger="cycle" cycleMs={11000} />
         <span className="text-accent">.</span>
       </span>
     </h1>
@@ -41,6 +44,7 @@ function HeroTitle() {
 }
 
 function HeroFacts() {
+  const t = useT();
   return (
     <motion.ul
       initial={{ opacity: 0, y: 12 }}
@@ -48,24 +52,29 @@ function HeroFacts() {
       transition={{ delay: 0.5, duration: 0.7 }}
       className="mt-7 flex flex-wrap items-center gap-2"
     >
-      {site.quickFacts.map((f) => (
-        <li
-          key={f.label}
-          className={
-            f.accent
-              ? 'inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/[0.06] px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-accent'
-              : 'inline-flex items-center gap-2 rounded-full border border-ink-700/70 bg-ink-900/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-bone-dim backdrop-blur'
-          }
-        >
-          {f.accent && <PulseDot size={6} />}
-          {f.label}
-        </li>
-      ))}
+      {site.quickFacts.map((f) => {
+        const label = t(`hero.facts.${f.id}` as 'hero.facts.open');
+        const accent = 'accent' in f && f.accent;
+        return (
+          <li
+            key={f.id}
+            className={
+              accent
+                ? 'inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/[0.06] px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-accent'
+                : 'inline-flex items-center gap-2 rounded-full border border-ink-700/70 bg-ink-900/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-bone-dim backdrop-blur'
+            }
+          >
+            {accent && <PulseDot size={6} />}
+            {label}
+          </li>
+        );
+      })}
     </motion.ul>
   );
 }
 
 function HeroCtas() {
+  const t = useT();
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -74,19 +83,14 @@ function HeroCtas() {
       className="mt-8 flex flex-wrap items-center gap-3"
     >
       <PrimaryButton href="#work">
-        Ver el deck
+        {t('hero.cta.deck')}
         <ArrowDown size={14} className="transition-transform group-hover:translate-y-0.5" />
       </PrimaryButton>
       <GhostButton href={site.social.github} target="_blank" rel="noreferrer">
         <Github size={13} />
-        GitHub
+        {t('hero.cta.github')}
       </GhostButton>
-      <IconButton
-        href={site.social.linkedin}
-        target="_blank"
-        rel="noreferrer"
-        label="LinkedIn"
-      >
+      <IconButton href={site.social.linkedin} target="_blank" rel="noreferrer" label="LinkedIn">
         <Linkedin size={14} />
       </IconButton>
       <IconButton href={`mailto:${site.email}`} label="Email">
@@ -97,6 +101,7 @@ function HeroCtas() {
 }
 
 function ScrollHint() {
+  const t = useT();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -105,7 +110,7 @@ function ScrollHint() {
       className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 sm:block"
     >
       <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone-mute">
-        scroll ↓
+        {t('hero.scrollHint')}
       </div>
     </motion.div>
   );
@@ -130,6 +135,7 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const mouse = useMouseParallax(reduced);
+  const t = useT();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -162,7 +168,7 @@ export function Hero() {
             transition={{ delay: 0.4, duration: 0.7 }}
             className="mt-8 max-w-xl text-base sm:text-lg text-bone-dim text-pretty"
           >
-            {site.tagline}
+            {t('hero.tagline')}
           </motion.p>
 
           <HeroFacts />
