@@ -1,9 +1,9 @@
-import type { Preview } from '@/data/projects';
+import type { EditorPreviewData } from './types';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 
 type Props = {
-  preview: Extract<Preview, { kind: 'editor' }>;
+  preview: EditorPreviewData;
   accentRgb: string;
 };
 
@@ -20,7 +20,7 @@ export function EditorPreview({ preview, accentRgb }: Props) {
   const lines = preview.lines ?? [];
   return (
     <PreviewFrame accentRgb={accentRgb}>
-      <WindowChrome title={preview.title} accentRgb={accentRgb} />
+      <WindowChrome title={preview.title ?? ''} accentRgb={accentRgb} />
       <div className="relative grid grid-cols-[auto_1fr] font-mono text-xs sm:text-sm">
         <div className="select-none border-r border-ink-700/40 px-3 py-5 text-right text-bone-mute/70">
           {lines.map((_, i) => (

@@ -1,9 +1,9 @@
-import type { Preview } from '@/data/projects';
+import type { GraphPreviewData } from './types';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 
 type Props = {
-  preview: Extract<Preview, { kind: 'graph' }>;
+  preview: GraphPreviewData;
   accentRgb: string;
 };
 
@@ -33,7 +33,7 @@ export function GraphPreview({ preview, accentRgb }: Props) {
 
   return (
     <PreviewFrame accentRgb={accentRgb}>
-      <WindowChrome title={preview.title} accentRgb={accentRgb} />
+      <WindowChrome title={preview.title ?? ''} accentRgb={accentRgb} />
       <div className="relative flex h-full flex-col p-5 sm:p-6">
         <div className="flex items-end justify-between">
           <div>

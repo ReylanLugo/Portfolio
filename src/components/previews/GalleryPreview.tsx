@@ -1,9 +1,9 @@
-import type { Preview } from '@/data/projects';
+import type { GalleryPreviewData } from './types';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 
 type Props = {
-  preview: Extract<Preview, { kind: 'gallery' }>;
+  preview: GalleryPreviewData;
   accentRgb: string;
 };
 
@@ -57,13 +57,13 @@ function GalleryTile({
 export function GalleryPreview({ preview, accentRgb }: Props) {
   return (
     <PreviewFrame accentRgb={accentRgb}>
-      <WindowChrome title={preview.title} accentRgb={accentRgb} />
+      <WindowChrome title={preview.title ?? ''} accentRgb={accentRgb} />
       <div className="grid h-full grid-cols-3 gap-2 p-4 sm:p-5">
         {preview.tiles.map((t, i) => (
           <GalleryTile
             key={i}
             index={i}
-            label={t.label}
+            label={preview.tileLabels?.[i] ?? ''}
             tone={t.tone}
             accentRgb={accentRgb}
             highlighted={i === 0}

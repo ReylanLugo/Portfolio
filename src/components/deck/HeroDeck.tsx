@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { projects } from '@/data/projects';
+import { useT } from '@/i18n';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useDeckCycle } from '@/hooks/useDeckCycle';
 import { DECK_SLOT_OFFSETS, DECK_CYCLE_MS } from './deckSlots';
@@ -15,10 +16,14 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
   const reduced = useReducedMotion();
   const [paused, setPaused] = useState(false);
   const { cycle, advance } = useDeckCycle({ intervalMs: DECK_CYCLE_MS, paused });
+  const t = useT();
 
   const deck = projects.slice(0, DECK_SLOT_OFFSETS.length);
   const total = deck.length;
   const front = deck[cycle % total];
+  const frontName = front
+    ? ((t.raw(`projects.${front.id}.name` as never) as string) ?? '')
+    : '';
 
   const advanceFromKeyboard = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -65,7 +70,7 @@ export function HeroDeck({ mouseX, mouseY }: Props) {
       <DeckIndicator
         total={total}
         active={cycle % total}
-        label={front?.name.replace('.', ' ') ?? ''}
+        label={frontName.replace('.', ' ')}
       />
     </div>
   );

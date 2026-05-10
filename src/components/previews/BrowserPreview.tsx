@@ -1,9 +1,9 @@
-import type { Preview } from '@/data/projects';
+import type { BrowserPreviewData } from './types';
 import { PreviewFrame } from './PreviewFrame';
 import { WindowChrome } from './WindowChrome';
 
 type Props = {
-  preview: Extract<Preview, { kind: 'browser' }>;
+  preview: BrowserPreviewData;
   accentRgb: string;
 };
 
@@ -73,8 +73,8 @@ export function BrowserPreview({ preview, accentRgb }: Props) {
 
   return (
     <PreviewFrame accentRgb={accentRgb}>
-      <WindowChrome title={preview.title} accentRgb={accentRgb} />
-      <AddressBar url={preview.title} />
+      <WindowChrome title={preview.title ?? ''} accentRgb={accentRgb} />
+      <AddressBar url={preview.title ?? ''} />
       <SiteNav accentRgb={accentRgb} />
       <Cover accentRgb={accentRgb} />
 

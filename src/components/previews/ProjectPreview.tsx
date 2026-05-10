@@ -9,8 +9,27 @@ import { ApiPreview } from './ApiPreview';
 import { GraphPreview } from './GraphPreview';
 import { GalleryPreview } from './GalleryPreview';
 
+type LocalizedPreviewData = NonNullable<Project['preview']> & {
+  title?: string;
+  lines?: string[];
+  request?: string[];
+  response?: string[];
+  metric?: string;
+  value?: string;
+  delta?: string;
+  tileLabels?: string[];
+};
+
+type LocalizedProject = Project & {
+  name: string;
+  tagline: string;
+  description: string;
+  highlights: { label: string; value: string }[];
+  preview: LocalizedPreviewData;
+};
+
 type Props = {
-  project: Project;
+  project: LocalizedProject;
   accentRgb: string;
 };
 
